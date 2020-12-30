@@ -5,7 +5,6 @@ import { db, auth } from "./firebase";
 import Modal from "@material-ui/core/Modal";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, Input } from "@material-ui/core";
-import { SettingsSystemDaydreamOutlined } from "@material-ui/icons";
 
 function getModalStyle() {
   const top = 50;
@@ -37,10 +36,20 @@ function App() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [user, setUser] = useState(null);
 
-  // useEffect(()=>{
-  //   auth.onAuthStateChanged((authUser))
-  // }, [])
+  useEffect(() => {
+    auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
+        //user has logged in
+        // console.log(authUser);
+        setUser(authUser);
+      } else {
+        //user has logged out
+        setUser(null);
+      }
+    });
+  }, [user, username]);
 
   useEffect(() => {
     db.collection("posts").onSnapshot((snapshot) => {
@@ -58,11 +67,17 @@ function App() {
 
     auth
       .createUserWithEmailAndPassword(email, password)
+      .then((authUser) => {
+        return authUser.user.updateProfile({
+          displayName: username,
+        });
+      })
       .catch((error) => alert(error.message));
 
     setUsername("");
     setEmail("");
     setPassword("");
+    setOpen(false);
   };
 
   return (
