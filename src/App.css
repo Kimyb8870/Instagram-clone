@@ -12,3 +12,8 @@
 
 .app__headerImage {
 }
+
+.app__signup {
+  display: flex;
+  flex-flow: column nowrap;
+}
