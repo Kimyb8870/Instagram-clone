@@ -58,8 +58,8 @@ const ImageUpload = ({ username }) => {
   };
 
   return (
-    <div className="imageupload">
-      <progress max="100" value={progress} />
+    <div className="imageUpload">
+      <progress max="100" className="imageUpload__progress" value={progress} />
       <Input
         type="text"
         placeholder="Enter a Caption"

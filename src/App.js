@@ -181,22 +181,17 @@ function App() {
           className="app__headerImage"
           src="https://www.instagram.com/static/images/web/mobile_nav_type_logo-2x.png/1b47f9d0e595.png"
         />
-      </div>
-      {user?.displayName ? (
-        <ImageUpload username={user.displayName} />
-      ) : (
-        <h3>Sorry you need to log in to upload</h3>
-      )}
 
-      {/* for deal with log in, sign up or sign out */}
-      {user ? (
-        <Button onClick={() => auth.signOut()}>Logout</Button>
-      ) : (
-        <div className="app__loginContainer">
-          <Button onClick={() => setOpenSignIn(true)}>Login</Button>
-          <Button onClick={() => setOpen(true)}>Sign up</Button>
-        </div>
-      )}
+        {/* for deal with log in, sign up or sign out */}
+        {user ? (
+          <Button onClick={() => auth.signOut()}>Logout</Button>
+        ) : (
+          <div className="app__loginContainer">
+            <Button onClick={() => setOpenSignIn(true)}>Login</Button>
+            <Button onClick={() => setOpen(true)}>Sign up</Button>
+          </div>
+        )}
+      </div>
 
       {/* test post below*/}
       {posts.map(({ id, post: { username, imageUrl, caption } }) => (
@@ -207,6 +202,11 @@ function App() {
           caption={caption}
         />
       ))}
+      {user?.displayName ? (
+        <ImageUpload username={user.displayName} />
+      ) : (
+        <h3>Sorry you need to log in to upload</h3>
+      )}
     </div>
   );
 }
