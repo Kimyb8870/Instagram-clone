@@ -3,6 +3,11 @@
   height: 100vh;
 }
 
+.app__signup {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
 .app__header {
   background-color: white;
   object-fit: contain;
@@ -17,7 +22,24 @@
   object-fit: contain;
 }
 
-.app__signup {
+.app__posts {
+  padding: 20px;
   display: flex;
-  flex-flow: column nowrap;
+  justify-content: center;
+}
+
+.app__postsRight {
+  margin-left: 10px;
+}
+
+@media (max-width: 720px) {
+  .app__posts {
+    flex-wrap: wrap;
+  }
+  .app__postsLeft {
+    order: 1;
+  }
+  .app__postsRight {
+    margin-left: 0;
+  }
 }

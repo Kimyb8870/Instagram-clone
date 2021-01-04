@@ -6,6 +6,7 @@ import Modal from "@material-ui/core/Modal";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, Input } from "@material-ui/core";
 import ImageUpload from "./ImageUpload";
+import InstagramEmbed from "react-instagram-embed";
 
 function getModalStyle() {
   const top = 50;
@@ -50,7 +51,6 @@ function App() {
     auth.onAuthStateChanged((authUser) => {
       if (authUser) {
         //user has logged in
-        console.log(authUser);
         setUser(authUser);
       } else {
         //user has logged out
@@ -193,15 +193,45 @@ function App() {
         )}
       </div>
 
-      {/* test post below*/}
-      {posts.map(({ id, post: { username, imageUrl, caption } }) => (
-        <Post
-          key={id}
-          username={username}
-          imageUrl={imageUrl}
-          caption={caption}
-        />
-      ))}
+      <div className="app__posts">
+        <div className="app__postsLeft">
+          {posts.map(({ id, post: { username, imageUrl, caption } }) => (
+            <Post
+              key={id}
+              username={username}
+              imageUrl={imageUrl}
+              caption={caption}
+            />
+          ))}
+        </div>
+        <div className="app__postsRight">
+          <Post
+            key={0}
+            username="hotFix"
+            imageUrl="https://images.unsplash.com/photo-1575089976121-8ed7b2a54265?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80"
+            caption="this is for hotfix"
+          />
+          {/* <InstagramEmbed
+            url="https://www.instagram.com/p/CIxQY_EpeWN/"
+            // clientAccessToken="123|456"
+            // https://www.npmjs.com/package/react-instagram-embed
+            // follow this
+            maxWidth={320}
+            hideCaption={false}
+            containerTagName="div"
+            protocol=""
+            injectScript
+            onLoading={() => {}}
+            onSuccess={() => {
+              console.log("success");
+            }}
+            onAfterRender={() => {}}
+            onFailure={() => {}}
+            className="instagramEmbed"
+          /> */}
+        </div>
+      </div>
+
       {user?.displayName ? (
         <ImageUpload username={user.displayName} />
       ) : (
